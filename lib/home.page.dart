@@ -25,33 +25,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "App",
-            style: TextStyle(color: Colors.white, fontSize: 30),
-          ),
-          backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text(
+          "App",
+          style: TextStyle(color: Colors.white, fontSize: 30),
         ),
-        body: SafeArea(child: Padding(padding: EdgeInsets.all(16),
+        backgroundColor: Colors.black,
+      ),
+      body: SafeArea(child: Padding(padding: EdgeInsets.all(16),
         child: IndexedStack(
           index: currIndex ,
           children:pages,
         ),
-        )),
+      )),
       bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
+        type: BottomNavigationBarType.fixed,
         currentIndex: currIndex,
         backgroundColor: Colors.black,
         selectedItemColor: Colors.cyan,
         unselectedItemColor: Colors.white ,
         items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.login), label: "Login"),
-        BottomNavigationBarItem(icon: Icon(Icons.map), label: "Cards"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.login), label: "Login"),
+          BottomNavigationBarItem(icon: Icon(Icons.map), label: "Cards"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
 
-      ], onTap: ChangePage,),
+        ], onTap: ChangePage,),
     );
   }
 }
-  

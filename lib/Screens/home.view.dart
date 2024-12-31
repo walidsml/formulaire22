@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -23,7 +25,7 @@ class HomeView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Bienvenue !',
+                      'Bienvenue, ${FirebaseAuth.instance.currentUser?.displayName ?? 'Utilisateur'} !',
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8),
@@ -34,6 +36,7 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
               ),
+
               SizedBox(height: 20),
               Text(
                 'Informations essentielles',

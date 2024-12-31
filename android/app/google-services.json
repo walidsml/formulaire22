@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "90113669963",
+    "project_id": "formdlflut",
+    "storage_bucket": "formdlflut.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90113669963:android:4858f92eb1e95e5c3d46ce",
+        "android_client_info": {
+          "package_name": "com.example.formulaire22"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaticTe8o2uzfI0F9Jb_6CZXxyprrsLxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
