@@ -5,10 +5,6 @@ import 'package:formulaire22/Screens/home.view.dart';
 import 'package:formulaire22/Screens/login.view.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // For Firebase authentication
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 

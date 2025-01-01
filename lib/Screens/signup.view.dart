@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'login.view.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -72,7 +73,14 @@ class _SignUpViewState extends State<SignUpView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Créer un compte')),
+      appBar: AppBar(
+        title: const Text(
+          'Créer un compte',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.black,
+        elevation: 0,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -80,67 +88,94 @@ class _SignUpViewState extends State<SignUpView> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const SizedBox(height: 50),
               const Text(
                 'Inscription',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 20),
-              TextField(
+              const SizedBox(height: 30),
+              _buildTextField(
                 controller: _firstNameController,
-                decoration: const InputDecoration(
-                  labelText: 'Prénom',
-                  border: OutlineInputBorder(),
-                ),
+                label: 'Prénom',
+                obscureText: false,
               ),
               const SizedBox(height: 16),
-              TextField(
+              _buildTextField(
                 controller: _lastNameController,
-                decoration: const InputDecoration(
-                  labelText: 'Nom de famille',
-                  border: OutlineInputBorder(),
-                ),
+                label: 'Nom de famille',
+                obscureText: false,
               ),
               const SizedBox(height: 16),
-              TextField(
+              _buildTextField(
                 controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
-                ),
+                label: 'Email',
+                obscureText: false,
               ),
               const SizedBox(height: 16),
-              TextField(
+              _buildTextField(
                 controller: _passwordController,
+                label: 'Mot de passe',
                 obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Mot de passe',
-                  border: OutlineInputBorder(),
-                ),
               ),
               const SizedBox(height: 16),
-              TextField(
+              _buildTextField(
                 controller: _confirmPasswordController,
+                label: 'Confirmer le mot de passe',
                 obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Confirmer le mot de passe',
-                  border: OutlineInputBorder(),
-                ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: _signUp,
-                child: const Text('S\'inscrire'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black, // Black background color
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 10,
+                ),
+                child: const Text(
+                  "S'inscrire",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 16),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('Retour à la connexion'),
+                style: TextButton.styleFrom(foregroundColor: Colors.black), // For TextButton
+                child: const Text(
+                  'Retour à la connexion',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required bool obscureText,
+  }) {
+    return TextField(
+      controller: controller,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: const TextStyle(color: Colors.black87),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.black54),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.black),
         ),
       ),
     );
