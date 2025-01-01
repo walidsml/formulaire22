@@ -40,7 +40,8 @@ class _TensorFlowViewState extends State<TensorFlow> {
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
-        _result = "Classifying...";  // Update UI to show that classification is in progress
+        _result =
+        "Classifying..."; // Update UI to show that classification is in progress
       });
 
       // Call the classify function after updating the UI
@@ -54,7 +55,8 @@ class _TensorFlowViewState extends State<TensorFlow> {
       var input = await _preprocessImage(image);
 
       // Initialize the output tensor to be a list of doubles
-      var output = List.generate(1, (i) => List.generate(_labels.length, (j) => 0.0));
+      var output = List.generate(
+          1, (i) => List.generate(_labels.length, (j) => 0.0));
 
       // Run inference
       _interpreter?.run(input, output);
@@ -63,22 +65,21 @@ class _TensorFlowViewState extends State<TensorFlow> {
       print("Output: $output");
 
       // Get the index of the highest probability
-      var maxIndex = output[0].indexOf(output[0].reduce((a, b) => a > b ? a : b));
+      var maxIndex = output[0].indexOf(
+          output[0].reduce((a, b) => a > b ? a : b));
 
       // Set the result as the class label corresponding to the highest probability
       setState(() {
-        _result = _labels[maxIndex];  // Use the index to get the label from _labels
+        _result =
+        _labels[maxIndex]; // Use the index to get the label from _labels
       });
     } catch (e) {
       setState(() {
-        _result = "Error classifying image";  // Update result in case of error
+        _result = "Error classifying image"; // Update result in case of error
       });
       print("Error classifying image: $e");
     }
   }
-
-
-
 
 
   // Preprocess the image to fit the model input
@@ -89,7 +90,8 @@ class _TensorFlowViewState extends State<TensorFlow> {
     img.Image? imageData = img.decodeImage(Uint8List.fromList(imageBytes));
 
     // Resize the image to 150x150 using the image package's copyResize method
-    img.Image resizedImage = img.copyResize(imageData!, width: 150, height: 150);
+    img.Image resizedImage = img.copyResize(
+        imageData!, width: 150, height: 150);
 
     // Normalize the image data (scale pixel values between 0 and 1)
     List<List<List<double>>> processedData = List.generate(150, (i) {
@@ -107,35 +109,85 @@ class _TensorFlowViewState extends State<TensorFlow> {
     // Reshape to [1, 150, 150, 3] for TensorFlow Lite input
     var inputTensor = processedData.map((row) {
       return row.map((pixel) {
-        return List<double>.from(pixel);  // Convert the pixel values to List<double>
+        return List<double>.from(
+            pixel); // Convert the pixel values to List<double>
       }).toList();
     }).toList();
 
-    return [inputTensor];  // Wrap in outer list to match model's expected shape
+    return [inputTensor]; // Wrap in outer list to match model's expected shape
   }
 
   // Select an image from the gallery
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Fruit Classifier")),
+      appBar: AppBar(
+        title: Text("Fruit Classifier"),
+        backgroundColor: Colors.lightGreen, // Change the app bar color
+        elevation: 0,
+      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _image == null
-                ? Text("No image selected")
-                : Image.file(_image!),
-            SizedBox(height: 20),
-            Text(_result, style: TextStyle(fontSize: 24)),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _pickImage,
-              child: Text("Pick an image to classify"),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0), // Add padding for better layout
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _image == null
+                  ? Container(
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300], // Placeholder background color
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.image,
+                  color: Colors.grey[700],
+                  size: 50,
+                ),
+              )
+                  : ClipRRect(
+                borderRadius: BorderRadius.circular(8), // Add rounded corners
+                child: Image.file(
+                  _image!,
+                  width: 150,
+                  height: 150,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                _result,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _pickImage,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.lightGreenAccent, // Button background color
+                  foregroundColor: Colors.black, // Button text color
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8), // Rounded button
+                  ),
+                ),
+                child: Text(
+                  "Pick an image to classify",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              )
+
+            ],
+          ),
         ),
       ),
     );

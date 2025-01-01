@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import './TensorFlow.view.dart';
 
-
-
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
@@ -17,6 +15,7 @@ class HomeView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Welcome Section
               Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -32,7 +31,7 @@ class HomeView extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Explorez les fonctionnalités de notre application et restez informé.',
+                      'Explorez les fonctionnalités de notre application et découvrez comment identifier des fruits en un instant.',
                       style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                     ),
                   ],
@@ -40,8 +39,10 @@ class HomeView extends StatelessWidget {
               ),
 
               SizedBox(height: 20),
+
+              // Fruit Classifier Info Section
               Text(
-                'Informations essentielles',
+                'Fruit Classifier',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
@@ -51,10 +52,9 @@ class HomeView extends StatelessWidget {
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   children: [
-                    buildGridItem(Icons.login, 'Login', 'Connectez-vous', Colors.blue[100]!),
-                    buildGridItem(Icons.person, 'Profil', 'Accéder et modifier votre profil', Colors.red[100]!),
-                    buildGridItem(Icons.map, 'Carte', 'Localisez les ressources', Colors.green[100]!),
-                    buildGridItem(Icons.more_horiz, 'Autres', 'Explorez vos intérêts', Colors.orange[100]!),
+                    buildGridItem(Icons.camera_alt, 'Capture', 'Take a picture of a fruit to classify it.', Colors.blue[100]!),
+                    buildGridItem(Icons.lightbulb, 'Deep Learning', 'Uses AI to identify fruits with high accuracy.', Colors.red[100]!),
+                    buildGridItem(Icons.info, 'How It Works', 'Powered by a TensorFlow model trained on fruit datasets.', Colors.green[100]!),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -62,18 +62,19 @@ class HomeView extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => TensorFlow()),
                         );
                       },
-                      child: buildGridItem(Icons.computer, 'TensorFlow', 'Accéder à TensorFlow', Colors.purple[100]!),
+                      child: buildGridItem(Icons.computer, 'TensorFlow', 'Explore TensorFlow view.', Colors.purple[100]!),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 10),
+
+              // Tips Section
               Text(
-                'Conseils et Astuces',
+                'Tips for Best Results',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-              // "Voici quelques conseils..." section with background
               Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -81,7 +82,9 @@ class HomeView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  'Voici quelques conseils importants pour rester en sécurité et informé.',
+                  '• Ensure good lighting when capturing fruit images.\n'
+                      '• Avoid blurry or partial images for better accuracy.\n'
+                      '• The model recognizes common fruits; unusual items may not be classified.',
                   style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                 ),
               ),
