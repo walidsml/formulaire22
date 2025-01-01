@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import './TensorFlow.view.dart';
+
 
 
 class HomeView extends StatelessWidget {
@@ -53,6 +55,15 @@ class HomeView extends StatelessWidget {
                     buildGridItem(Icons.person, 'Profil', 'Accéder et modifier votre profil', Colors.red[100]!),
                     buildGridItem(Icons.map, 'Carte', 'Localisez les ressources', Colors.green[100]!),
                     buildGridItem(Icons.more_horiz, 'Autres', 'Explorez vos intérêts', Colors.orange[100]!),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TensorFlow()),
+                        );
+                      },
+                      child: buildGridItem(Icons.computer, 'TensorFlow', 'Accéder à TensorFlow', Colors.purple[100]!),
+                    ),
                   ],
                 ),
               ),
